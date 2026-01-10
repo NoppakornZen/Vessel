@@ -17,6 +17,7 @@ var current_hp = 100
 var max_stamina = 100
 var current_stamina = 100
 var stamina_regen_rate = 10 
+var health = 100 
 
 func _ready():
 	health_bar.max_value = max_hp
@@ -82,3 +83,9 @@ func _play_idle_animation():
 		sprite.play("Sword_Idle_Up" if has_zayryu else "Idle_Up")
 	else:
 		sprite.play("Sword_Idle_Down" if has_zayryu else "Idle_Down")
+		
+func take_damage(amount):
+	health -= amount
+	print("Zon Health: ", health) # ดูเลือดลดในแถบ Output
+	if health <= 0:
+		print("เกมโอเวอร์... Zon พ่ายแพ้")
