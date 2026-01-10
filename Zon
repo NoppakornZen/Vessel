@@ -1,0 +1,70 @@
+extends CharacterBody2D
+
+const SPEED = 130.0
+@onready var sprite = $AnimatedSprite2D
+
+var last_dir = "Down"
+var last_flip = false 
+# เพิ่มตัวแปรเช็คสถานะว่า Zon ถือดาบ Zayryu หรือยัง
+var has_zayryu = false 
+
+func _physics_process(_delta):
+	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	
+	if direction != Vector2.ZERO:
+		velocity = direction * SPEED
+		
+		if abs(direction.x) > abs(direction.y):
+			# --- เดินซ้าย-ขวา ---
+			# ถ้าถือดาบ ให้เล่นท่าวิ่งแบบถือดาบ ถ้าไม่ถือให้เล่นท่าเดิม
+			if has_zayryu:
+				sprite.play("Sword_Run_Side")
+			else:
+				sprite.play("Run_Side")
+			
+			last_flip = direction.x > 0 
+			sprite.flip_h = last_flip
+			last_dir = "Side"
+		else:
+			# --- เดินขึ้น-ลง ---
+			sprite.flip_h = false
+			if direction.y < 0:
+				if has_zayryu:
+					sprite.play("Sword_Run_Up")
+				else:
+					sprite.play("Run_Up")
+				last_dir = "Up"
+			else:
+				if has_zayryu:
+					sprite.play("Sword_Run_Down")
+				else:
+					sprite.play("Run_Down")
+				last_dir = "Down"
+	else:
+		velocity = velocity.move_toward(Vector2.ZERO, SPEED)
+		
+		# --- ท่า Idle (อยู่นิ่ง) ---
+		if last_dir == "Side":
+			if has_zayryu:
+				sprite.play("Sword_Idle_Side")
+			else:
+				sprite.play("Idle_Side")
+			sprite.flip_h = last_flip 
+		elif last_dir == "Up":
+			if has_zayryu:
+				sprite.play("Sword_Idle_Up")
+			else:
+				sprite.play("Idle_Up")
+		else:
+			if has_zayryu:
+				sprite.play("Sword_Idle_Down")
+			else:
+				sprite.play("Idle_Down")
+
+	move_and_slide()
+
+# ฟังก์ชันสำหรับเปลี่ยนโหมดเป็นถือดาบ (ให้ Script ของดาบเป็นคนสั่งเรียกใช้ฟังก์ชันนี้)
+func change_to_sword_mode():
+	has_zayryu = true
+	print("Zon has obtained Zayryu! Changing animation...")
+	# คุณสามารถเพิ่มคำสั่งแสดง Health Bar ตรงนี้ได้ในอนาคต
