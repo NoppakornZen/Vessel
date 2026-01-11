@@ -12,6 +12,7 @@ var has_zayryu = false
 var can_attack = true
 var is_dead = false # เพิ่มตัวแปรเช็คสถานะตาย
 var is_attacking = false # เพิ่มตัวแปรเพื่อเช็คว่ากำลังฟันอยู่หรือไม่
+var knockback_velocity = Vector2.ZERO
 
 var max_hp = 100
 var current_hp = 100 
@@ -66,15 +67,18 @@ func perform_attack():
 	for body in targets:
 		if body.is_in_group("mobs") and body.has_method("take_damage"):
 			var knockback_direction = (body.global_position - global_position).normalized()
-			body.take_damage(knockback_direction * 400.0)
+			body.take_damage(30, knockback_direction * 400.0)
 
 func _on_attack_timer_timeout():
 	can_attack = true
 
-func take_damage(amount):
+func take_damage(amount: int, knockback_force: Vector2):
 	if is_dead: return
-	current_hp = clamp(current_hp - amount, 0, max_hp)
+	
+	current_hp -= amount
 	health_bar.value = current_hp
+	knockback_velocity = knockback_force
+	
 	if current_hp <= 0:
 		die()
 
