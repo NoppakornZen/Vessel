@@ -523,6 +523,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sq53y"]
+radius = 11.176455
 
 [node name="Zon" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -555,7 +556,7 @@ energy = 0.27
 texture = ExtResource("3_ko5ig")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-modulate = Color(1, 1, 0.4509804, 1)
+modulate = Color(0.8317512, 0.8253731, 0, 1)
 offset_left = -9.0
 offset_top = -12.0
 offset_right = 35.999977
@@ -584,6 +585,7 @@ scale = Vector2(2.6842144, 2.7123713)
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordArea"]
+scale = Vector2(1, 0.88202196)
 shape = SubResource("CircleShape2D_sq53y")
 
 [node name="AttackTimer" type="Timer" parent="."]
