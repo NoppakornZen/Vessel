@@ -1,0 +1,96 @@
+[gd_scene load_steps=11 format=3 uid="uid://77x1qspyptly"]
+
+[ext_resource type="Script" uid="uid://b0p1cyqwmy2ke" path="res://Scripts/slime.gd" id="1_cwriv"]
+[ext_resource type="Texture2D" uid="uid://btd7xcjsa41x5" path="res://Prop/Slime_Green.png" id="2_oh23g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yp2de"]
+atlas = ExtResource("2_oh23g")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50oqk"]
+atlas = ExtResource("2_oh23g")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eeskg"]
+atlas = ExtResource("2_oh23g")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jt5hk"]
+atlas = ExtResource("2_oh23g")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v48kq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yp2de")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50oqk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eeskg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jt5hk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_abawa"]
+radius = 16.003294
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cwriv"]
+radius = 14.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p1xxi"]
+radius = 9.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["mobs"]]
+y_sort_enabled = true
+collision_layer = 2
+script = ExtResource("1_cwriv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+sprite_frames = SubResource("SpriteFrames_v48kq")
+frame = 1
+frame_progress = 0.6002142
+offset = Vector2(0, -5.36)
+
+[node name="Area2D" type="Area2D" parent="."]
+y_sort_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+y_sort_enabled = true
+position = Vector2(0, -1)
+scale = Vector2(6.730159, -6.535298)
+shape = SubResource("CircleShape2D_abawa")
+
+[node name="AttackArea" type="Area2D" parent="."]
+y_sort_enabled = true
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+y_sort_enabled = true
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_cwriv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_p1xxi")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+modulate = Color(0.84920025, 0, 0.03323948, 1)
+offset_left = -11.0
+offset_top = -20.0
+offset_right = 12.0
+offset_bottom = -16.0
+show_percentage = false
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
