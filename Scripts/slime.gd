@@ -90,23 +90,19 @@ func die():
 	queue_free()
 	
 
-func _on_hitbox_area_entered(area):
-	# เช็คว่าสิ่งที่มาชนคือดาบ Zayryu หรือไม่
-	if area.name == "ZayryuHitbox" or area.is_in_group("weapon"):
-		hit_flash() # สั่งให้กะพริบ
-		# คุณสามารถใส่ print("Slime Hit!") ตรงนี้เพื่อเช็คใน Output ได้ครับ
-		
 # ฟังก์ชันกะพริบ
 func hit_flash():
-	modulate = Color(10, 10, 10) 
-	await get_tree().create_timer(0.1).timeout 
-	modulate = Color(1, 1, 1)
+	modulate = Color(1, 0, 0) # เปลี่ยนเป็นสีแดง
+	await get_tree().create_timer(0.1).timeout # รอ 0.1 วินาที
+	modulate = Color(1, 1, 1) # กลับเป็นสีปกติ
 
-# ฟังก์ชันนี้ต้องชื่อตรงกับที่ปรากฏในหน้าต่าง Signal (image_308dac.png)
+# ฟังก์ชันรับสัญญาณชน
 func _on_area_2d_area_entered(area):
-	print("ตรวจพบการชนกับ: ", area.name) # ดูในหน้าจอ Output ว่าชื่ออะไรโผล่มา
-	
-	# ถ้าชื่อ Node ดาบในตัว Zon ไม่ใช่ ZayryuHitbox ให้เปลี่ยนตรงนี้
+	# 1. เช็คว่าเป็นดาบ Zayryu หรืออยู่ในกลุ่ม weapon หรือไม่
 	if area.name == "ZayryuHitbox" or area.is_in_group("weapon"):
-		print("โจมตีสำเร็จ! กำลังกะพริบ...")
-		hit_flash()
+		# 2. ดึงข้อมูลจากตัวละคร Zon (Parent ของดาบ)
+		var zon = area.get_parent() 
+		# 3. เช็คว่า Zon กำลังกดฟันอยู่จริงๆ (is_attacking == true)
+		if zon and zon.get("is_attacking") == true:
+			print("ยืนยันการโดนฟัน: กะพริบแดง!")
+			hit_flash()

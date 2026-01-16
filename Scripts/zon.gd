@@ -4,7 +4,7 @@ const SPEED = 130.0
 @onready var sprite = $AnimatedSprite2D
 @onready var health_bar = $ProgressBar 
 @onready var anim_player = $AnimationPlayer 
-@onready var sword_area = $SwordArea
+@onready var sword_area = $ZayryuHitbox
 
 var last_dir = "Down"
 var last_flip = false 
@@ -22,7 +22,7 @@ func _ready():
 	health_bar.value = current_hp
 	health_bar.visible = false 
 	# ตั้งค่า SwordArea ให้ตรวจจับตลอดเวลา
-	sword_area.monitoring = true 
+	$ZayryuHitbox.monitoring = true
 
 func _physics_process(delta):
 	if is_dead: return
