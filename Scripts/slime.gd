@@ -3,106 +3,82 @@ extends CharacterBody2D
 var player = null
 var chase = false
 var can_attack = false
-var max_hp = 100 # ตั้งค่าเลือดสูงสุดเป็น 100
-var current_hp = 100
+var max_hp = 200 
+var current_hp = 200
 var is_dead = false
 
 const SPEED = 50.0
 const ATTACK_DAMAGE = 10
 const ATTACK_COOLDOWN = 1.0 
 
-@onready var health_bar = $ProgressBar # เพิ่มบรรทัดนี้เพื่อให้สคริปต์รู้จักหลอดเลือด
+@onready var health_bar = $ProgressBar 
+@onready var sprite = $AnimatedSprite2D # หรือชื่อ Node Sprite ของคุณ
 
 var attack_timer = 0.0
-# --- เพิ่มส่วนประกอบสำหรับแรงผลัก (Knockback) ---
 var knockback_velocity = Vector2.ZERO
 
 func _ready():
 	add_to_group("mobs") 
-	health_bar.max_value = max_hp # ตั้งค่าสูงสุดเป็น 100
-	health_bar.value = current_hp # เริ่มต้นที่ 100
+	health_bar.max_value = max_hp
+	health_bar.value = current_hp
 
 func _physics_process(delta):
-	# 1. จัดการแรงผลัก (ถ้ามีแรงส่งมา ให้เคลื่อนที่ตามแรงผลักก่อน)
+	if is_dead: return
+	
 	if knockback_velocity.length() > 10:
 		velocity = knockback_velocity
-		# ค่อยๆ ลดแรงผลักลงเหมือนแรงเสียดทาน (0.1 คือความลื่น ปรับเพิ่มได้)
 		knockback_velocity = knockback_velocity.lerp(Vector2.ZERO, 0.1)
-	
-	# 2. ระบบ AI เดิมของคุณ
 	elif chase and player:
 		var direction = (player.global_position - global_position).normalized()
 		velocity = direction * SPEED
-		
-		if can_attack:
-			attack_timer += delta
-			if attack_timer >= ATTACK_COOLDOWN:
-				_perform_attack()
-				attack_timer = 0.0 
 	else:
 		velocity = Vector2.ZERO
 	
 	move_and_slide()
 
-# --- ฟังก์ชันรับความเสียหายจาก Zon (ถูกเรียกใช้โดย zon.gd) ---
+# --- ฟังก์ชันรับดาเมจและการกะพริบแดง (รวมไว้ที่นี่ที่เดียว) ---
 func take_damage(amount: int, knockback_force: Vector2):
 	if is_dead: return
 	
 	current_hp -= amount
 	health_bar.value = current_hp
+	knockback_velocity = knockback_force
 	
-	# เปลี่ยนจาก velocity เป็น knockback_velocity เพื่อให้ระบบค่อยๆ เบรกทำงาน
-	knockback_velocity = knockback_force 
+	# เพิ่มความหยุดชะงัก (Hit Stun) เล็กน้อยให้ดูเหมือนโดนฟันจริงๆ
+	chase = false # หยุดเดินตามครู่หนึ่ง
+	hit_flash()
+	
+	# รอ 0.2 วินาทีค่อยกลับมาไล่ตามต่อ
+	await get_tree().create_timer(0.2).timeout
+	if not is_dead:
+		chase = true
 	
 	if current_hp <= 0:
 		die()
-	
 
-# ฟังก์ชันสั่งโจมตี (คงเดิม)
-func _perform_attack():
-	if player and player.has_method("take_damage"):
-		# คำนวณทิศทางแรงผลักจาก Slime ไปยัง Zon
-		var knockback_dir = (player.global_position - global_position).normalized()
-		
-		# ส่งค่า 2 อย่าง: 1. ดาเมจ (10), 2. แรงผลัก (knockback_dir * แรงที่ต้องการ)
-		player.take_damage(ATTACK_DAMAGE, knockback_dir * 300.0) 
-		print("Slime: กัด Zon เข้าให้แล้ว! (-", ATTACK_DAMAGE, ")")
-		
-# --- ระบบ Signal (คงเดิม) ---
+func hit_flash():
+	# ใช้สีขาวสว่างจ้า (White Flash) จะดูเป็นเกมแอ็กชันมากกว่าสีแดงล้วนครับ
+	modulate = Color(5, 5, 5) 
+	await get_tree().create_timer(0.08).timeout # กะพริบไวๆ จะดูคมกว่า
+	modulate = Color(1, 1, 1)
+
+func die():
+	is_dead = true
+	queue_free()
+
+# --- สัญญาณสำหรับไล่ตาม (Area2D วงกลมใหญ่) ---
 func _on_area_2d_body_entered(body):
 	if body.name == "Zon":
 		player = body
 		chase = true
 
-func _on_attack_area_body_entered(body):
-	if body.name == "Zon":
-		can_attack = true
-		attack_timer = ATTACK_COOLDOWN 
-		_perform_attack()
-
-func _on_attack_area_body_exited(body):
-	if body.name == "Zon":
-		can_attack = false
-		attack_timer = 0.0
-		
-func die():
-	is_dead = true
-	queue_free()
-	
-
-# ฟังก์ชันกะพริบ
-func hit_flash():
-	modulate = Color(1, 0, 0) # เปลี่ยนเป็นสีแดง
-	await get_tree().create_timer(0.1).timeout # รอ 0.1 วินาที
-	modulate = Color(1, 1, 1) # กลับเป็นสีปกติ
-
-# ฟังก์ชันรับสัญญาณชน
-func _on_area_2d_area_entered(area):
-	# 1. เช็คว่าเป็นดาบ Zayryu หรืออยู่ในกลุ่ม weapon หรือไม่
+# --- สัญญาณสำหรับรับดาเมจจากดาบ (Area2D_2 อันเล็กเท่าตัว) ---
+func _on_area_2d_2_area_entered(area):
 	if area.name == "ZayryuHitbox" or area.is_in_group("weapon"):
-		# 2. ดึงข้อมูลจากตัวละคร Zon (Parent ของดาบ)
-		var zon = area.get_parent() 
-		# 3. เช็คว่า Zon กำลังกดฟันอยู่จริงๆ (is_attacking == true)
+		var zon = area.get_parent()
+		# เช็คว่า Zon กำลังฟันอยู่จริงๆ
 		if zon and zon.get("is_attacking") == true:
-			print("ยืนยันการโดนฟัน: กะพริบแดง!")
-			hit_flash()
+			# เรียกใช้ฟังก์ชันรับดาเมจ
+			var knockback_dir = (global_position - zon.global_position).normalized()
+			take_damage(30, knockback_dir * 400.0)
+			print("Slime: โอ๊ย! โดน Zayryu ฟันเข้าให้แล้ว")

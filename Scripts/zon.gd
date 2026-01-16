@@ -55,21 +55,25 @@ func _input(event):
 		perform_attack()
 
 func perform_attack():
-	is_attacking = true 
+	if not can_attack or is_dead: return
+	
+	is_attacking = true
+	can_attack = false
 	$AttackTimer.start()
+	
+	# ปิดการตรวจจับไว้ก่อน (ป้องกันดาบไปโดนก่อนแอนิเมชันเริ่ม)
+	sword_area.monitoring = false 
 	
 	var attack_anim = "Sword_Attack_" + last_dir 
 	sprite.play(attack_anim)
 	sprite.flip_h = last_flip
 	
-	# ส่วนของการทำ Damage
-	var targets = sword_area.get_overlapping_bodies()
-	for body in targets:
-		if body.is_in_group("mobs") and body.has_method("take_damage"):
-			var knockback_direction = (body.global_position - global_position).normalized()
-			body.take_damage(30, knockback_direction * 400.0)
-			
-			$Camera2D.apply_shake(5.0) #สำคัญ!!!! ทำให้กล้องสั่นนน ปรับความเเรงเบา
+	# รอจังหวะให้ดาบเหวี่ยง (ประมาณ 0.1 วินาที หรือตามเฟรมแอนิเมชัน)
+	await get_tree().create_timer(0.1).timeout
+	sword_area.monitoring = true # เปิดให้ดาบฟันโดนได้จริง
+	
+	# สั่งสั่นกล้องให้ดูมีน้ำหนัก (สะใจขึ้น)
+	$Camera2D.apply_shake(5.0) #สำคัญ!!!! ทำให้กล้องสั่นนน ปรับความเเรงเบา
 
 func _on_attack_timer_timeout():
 	can_attack = true
@@ -121,9 +125,9 @@ func _play_idle_animation():
 
 # ฟังก์ชันนี้จะทำงานอัตโนมัติเมื่อแอนิเมชันเล่นจนจบเฟรมสุดท้าย
 func _on_animated_sprite_2d_animation_finished():
-	
 	if sprite.animation.begins_with("Sword_Attack"):
 		is_attacking = false
+		sword_area.monitoring = false # ดาบหายไป ไม่ให้เดินชนแล้วเลือดลด
 
 func change_to_sword_mode():
 	
