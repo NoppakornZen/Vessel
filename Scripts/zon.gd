@@ -69,7 +69,7 @@ func perform_attack():
 			var knockback_direction = (body.global_position - global_position).normalized()
 			body.take_damage(30, knockback_direction * 400.0)
 			
-			$Camera2D.apply_shake(5.0) #สำคัญ!!!! ทำให้กล้องสั่นนนน ปรับความเเรงเบา
+			$Camera2D.apply_shake(5.0) #สำคัญ!!!! ทำให้กล้องสั่นนน ปรับความเเรงเบา
 
 func _on_attack_timer_timeout():
 	can_attack = true

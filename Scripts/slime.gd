@@ -57,7 +57,7 @@ func take_damage(amount: int, knockback_force: Vector2):
 	if current_hp <= 0:
 		die()
 
-# ฟังก์ชันสั่งโจมตี Zon (คงเดิม)
+# ฟังก์ชันสั่งโจมตี (คงเดิม)
 func _perform_attack():
 	if player and player.has_method("take_damage"):
 		# คำนวณทิศทางแรงผลักจาก Slime ไปยัง Zon
