@@ -56,6 +56,7 @@ func take_damage(amount: int, knockback_force: Vector2):
 	
 	if current_hp <= 0:
 		die()
+	
 
 # ฟังก์ชันสั่งโจมตี (คงเดิม)
 func _perform_attack():
@@ -87,3 +88,25 @@ func _on_attack_area_body_exited(body):
 func die():
 	is_dead = true
 	queue_free()
+	
+
+func _on_hitbox_area_entered(area):
+	# เช็คว่าสิ่งที่มาชนคือดาบ Zayryu หรือไม่
+	if area.name == "ZayryuHitbox" or area.is_in_group("weapon"):
+		hit_flash() # สั่งให้กะพริบ
+		# คุณสามารถใส่ print("Slime Hit!") ตรงนี้เพื่อเช็คใน Output ได้ครับ
+		
+# ฟังก์ชันกะพริบ
+func hit_flash():
+	modulate = Color(10, 10, 10) 
+	await get_tree().create_timer(0.1).timeout 
+	modulate = Color(1, 1, 1)
+
+# ฟังก์ชันนี้ต้องชื่อตรงกับที่ปรากฏในหน้าต่าง Signal (image_308dac.png)
+func _on_area_2d_area_entered(area):
+	print("ตรวจพบการชนกับ: ", area.name) # ดูในหน้าจอ Output ว่าชื่ออะไรโผล่มา
+	
+	# ถ้าชื่อ Node ดาบในตัว Zon ไม่ใช่ ZayryuHitbox ให้เปลี่ยนตรงนี้
+	if area.name == "ZayryuHitbox" or area.is_in_group("weapon"):
+		print("โจมตีสำเร็จ! กำลังกะพริบ...")
+		hit_flash()
