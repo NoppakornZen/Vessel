@@ -68,6 +68,8 @@ func perform_attack():
 		if body.is_in_group("mobs") and body.has_method("take_damage"):
 			var knockback_direction = (body.global_position - global_position).normalized()
 			body.take_damage(30, knockback_direction * 400.0)
+			
+			$Camera2D.apply_shake(5.0) #สำคัญ!!!! ทำให้กล้องสั่นนนน ปรับความเเรงเบา
 
 func _on_attack_timer_timeout():
 	can_attack = true
@@ -119,16 +121,15 @@ func _play_idle_animation():
 
 # ฟังก์ชันนี้จะทำงานอัตโนมัติเมื่อแอนิเมชันเล่นจนจบเฟรมสุดท้าย
 func _on_animated_sprite_2d_animation_finished():
-	# เมื่อท่าฟันจบ ให้ปลดล็อคสถานะทันที
+	
 	if sprite.animation.begins_with("Sword_Attack"):
 		is_attacking = false
 
 func change_to_sword_mode():
-	# สั่งให้ AnimationPlayer เล่นท่ากระพริบตาที่เราตั้งไว้
+	
 	if anim_player.has_animation("blink_effect"):
 		anim_player.play("blink_effect")
 	
-	# รอ 1 วินาทีให้เอฟเฟกต์เล่นจบก่อนค่อยเปลี่ยนโหมด
 	await get_tree().create_timer(1.0).timeout
 	
 	has_zayryu = true
