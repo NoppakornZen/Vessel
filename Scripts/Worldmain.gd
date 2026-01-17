@@ -62,6 +62,13 @@ func _input(event):
 			if player:
 				player.set_physics_process(true)
 			print("Zon มุ่งหน้าไปหาดาบ!")
+			
+		# --- ช่วงที่ 3: บทสนทนาตอนเจอดาบเเล้ววว ---
+		elif dialogue_index == 13:
+			textbox.hide()
+			if player:
+				player.set_physics_process(true)
+			print("Zon มุ่งหน้าไปหาดาบ!")
 
 func spawn_slime():
 	var points = get_tree().get_nodes_in_group("spawn_points")
@@ -86,3 +93,16 @@ func _on_zayryu_trigger_body_entered(body: Node2D) -> void:
 			textbox.show()
 			textbox.set_dialogue("Zon: Huh? Why are things around me making me anxious?")
 			dialogue_index = 10 # เริ่มต้นลำดับบทสนทนาช่วงที่ 2 [cite: 2026-01-02]
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.name == "Zon" and not zayryu_event_triggered:
+		zayryu_event_triggered = true #ล็อคไว้ไม่ให้เกิดซ้ำ
+		
+	if player:
+			player.set_physics_process(false)
+			
+	if textbox:
+			textbox.show()
+			textbox.set_dialogue("Zon: Huh? What is this , It's a real sward? It looks very beautiful.")
+			dialogue_index = 13 # เริ่มต้นลำดับบทสนทนาช่วงที่ 3
