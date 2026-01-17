@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=3 uid="uid://egwkowbpqae2"]
+
+[ext_resource type="Texture2D" uid="uid://b3m3woopcv7sq" path="res://BlackZon.jpg" id="1_ngwm8"]
+[ext_resource type="FontFile" uid="uid://cgtmamxcljuk4" path="res://Born2bSportyV2.ttf" id="1_q8vo8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1814d"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k8bw4"]
+atlas = ExtResource("1_ngwm8")
+region = Rect2(325.52734, 47.510773, 396.83862, 563.92883)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ngwm8"]
+font_size = 91
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -356.0
+offset_right = -36.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = -16
+theme_override_constants/margin_bottom = 16
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1814d")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="MarginContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(299.42, 150)
+layout_mode = 2
+texture = SubResource("AtlasTexture_k8bw4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Start" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("1_q8vo8")
+text = "*"
+label_settings = SubResource("LabelSettings_ngwm8")
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("1_q8vo8")
+text = "Textt!!!!!!"
+label_settings = SubResource("LabelSettings_ngwm8")
+autowrap_mode = 1
+clip_text = true
+
+[node name="End" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("1_q8vo8")
+text = "*"
+label_settings = SubResource("LabelSettings_ngwm8")
