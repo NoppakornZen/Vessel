@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://b486ajagh3ah8"]
+[gd_scene load_steps=34 format=3 uid="uid://b486ajagh3ah8"]
 
 [ext_resource type="Script" uid="uid://cf0kl7n2oskrc" path="res://Scripts/Worldmain.gd" id="1_csvos"]
 [ext_resource type="Texture2D" uid="uid://cjb87p3vv12n4" path="res://Prop/Grass_Middle.png" id="2_81c2d"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bsdsg3ji24qp7" path="res://Scenes/tree.tscn" id="12_7mmci"]
 [ext_resource type="PackedScene" uid="uid://d2tdfb4iuw42i" path="res://Scenes/tree 2.tscn" id="13_khkpl"]
 [ext_resource type="PackedScene" uid="uid://c1effs88ak2cx" path="res://Scenes/tree_3.tscn" id="16_lr6e3"]
+[ext_resource type="PackedScene" uid="uid://egwkowbpqae2" path="res://Scenes/Textbox.tscn" id="17_dmf1v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aq4fw"]
 texture = ExtResource("2_81c2d")
@@ -1952,225 +1953,240 @@ horizontal_alignment = 1
 z_as_relative = false
 y_sort_enabled = true
 
-[node name="SlimeSpawnPoint" type="Marker2D" parent="Node2D" groups=["spawn_points"]]
+[node name="YSort" type="Node2D" parent="Node2D"]
+y_sort_enabled = true
+
+[node name="trees" type="Node2D" parent="Node2D/YSort"]
+z_as_relative = false
+y_sort_enabled = true
+
+[node name="tree" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(-155, 92.99999)
+scale = Vector2(0.588, 0.6)
+
+[node name="tree2" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(24, -47)
+scale = Vector2(0.588, 0.6)
+
+[node name="tree3" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(64, 18.999998)
+scale = Vector2(0.588, 0.6)
+
+[node name="tree4" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(-49, -1.9073486e-06)
+scale = Vector2(0.588, 0.6)
+
+[node name="treetwo" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(139, 2)
+
+[node name="treetwo2" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(-79, 85)
+
+[node name="treetwo3" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(94, -98)
+
+[node name="treetwo4" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(-98, -72)
+
+[node name="treetwo5" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(-278, -150)
+
+[node name="tree5" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(-31, -123.999985)
+scale = Vector2(0.588, 0.6)
+
+[node name="tree6" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(-12, 86)
+scale = Vector2(0.588, 0.6)
+
+[node name="tree7" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(196, -34)
+scale = Vector2(0.588, 0.6)
+
+[node name="tree8" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(-147, -3.0000005)
+scale = Vector2(0.588, 0.6)
+
+[node name="tree9" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(-226, -77.999985)
+scale = Vector2(0.588, 0.6)
+
+[node name="tree10" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(-259, 135)
+scale = Vector2(0.588, 0.6)
+
+[node name="treetwo6" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(227, -82)
+
+[node name="treetwo7" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(-255, 32)
+
+[node name="treetwo8" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(166, 63)
+
+[node name="treetwo9" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(-175, -106)
+
+[node name="treetwo10" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(-200, 65)
+
+[node name="tree11" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(-19, -41)
+scale = Vector2(0.588, 0.6)
+
+[node name="tree12" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(56, -12.000003)
+scale = Vector2(0.588, 0.6)
+
+[node name="tree13" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(251, 0.9999962)
+scale = Vector2(0.588, 0.6)
+
+[node name="treetwo11" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(51, 196)
+
+[node name="treetwo12" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(404, -77)
+
+[node name="treetwo13" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(6, -163)
+
+[node name="treetwo14" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(-294, 252)
+
+[node name="treetwo15" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(225, 264)
+
+[node name="treetwo16" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(571, 204)
+
+[node name="treetwo17" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(336, 29)
+
+[node name="treetwo18" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(432, 225)
+
+[node name="tree14" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(248, 91.99997)
+scale = Vector2(0.588, 0.6)
+
+[node name="tree15" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(319, 124.99997)
+scale = Vector2(0.588, 0.6)
+
+[node name="tree16" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(146, 189.99995)
+scale = Vector2(0.588, 0.6)
+
+[node name="tree17" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(437, 47.999985)
+scale = Vector2(0.588, 0.6)
+
+[node name="tree18" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(-117, 216.99995)
+scale = Vector2(0.588, 0.6)
+
+[node name="tree19" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(-44, 176.99997)
+scale = Vector2(0.588, 0.6)
+
+[node name="tree20" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(11, 135.99997)
+scale = Vector2(0.588, 0.6)
+
+[node name="tree21" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(314, -73.00001)
+scale = Vector2(0.588, 0.6)
+
+[node name="tree22" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(379, 226.99995)
+scale = Vector2(0.588, 0.6)
+
+[node name="tree23" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(304, 252.99995)
+scale = Vector2(0.588, 0.6)
+
+[node name="treetwo19" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(-174, 201)
+
+[node name="treetwo20" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(286, -143)
+
+[node name="tree 3" parent="Node2D/YSort/trees" instance=ExtResource("16_lr6e3")]
+y_sort_enabled = true
+position = Vector2(561, -117)
+
+[node name="tree 4" parent="Node2D/YSort/trees" instance=ExtResource("16_lr6e3")]
+y_sort_enabled = true
+position = Vector2(514, -62)
+
+[node name="tree 5" parent="Node2D/YSort/trees" instance=ExtResource("16_lr6e3")]
+y_sort_enabled = true
+position = Vector2(632, 12)
+
+[node name="tree 6" parent="Node2D/YSort/trees" instance=ExtResource("16_lr6e3")]
+y_sort_enabled = true
+position = Vector2(532, 16)
+
+[node name="tree 7" parent="Node2D/YSort/trees" instance=ExtResource("16_lr6e3")]
+y_sort_enabled = true
+position = Vector2(804, -32)
+
+[node name="tree 8" parent="Node2D/YSort/trees" instance=ExtResource("16_lr6e3")]
+y_sort_enabled = true
+position = Vector2(561, -117)
+
+[node name="SlimeSpawnPoint" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(618, 14)
 
-[node name="SlimeSpawnPoint2" type="Marker2D" parent="Node2D" groups=["spawn_points"]]
+[node name="SlimeSpawnPoint2" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(648, -30)
 
-[node name="SlimeSpawnPoint3" type="Marker2D" parent="Node2D" groups=["spawn_points"]]
+[node name="SlimeSpawnPoint3" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(715, 105)
 
-[node name="SlimeSpawnPoint4" type="Marker2D" parent="Node2D" groups=["spawn_points"]]
+[node name="SlimeSpawnPoint4" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(601, 66)
 
-[node name="SlimeSpawnPoint5" type="Marker2D" parent="Node2D" groups=["spawn_points"]]
+[node name="SlimeSpawnPoint5" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(792, 65)
 
-[node name="SlimeSpawnPoint6" type="Marker2D" parent="Node2D" groups=["spawn_points"]]
+[node name="SlimeSpawnPoint6" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(779, -4)
 
-[node name="SlimeSpawnPoint7" type="Marker2D" parent="Node2D" groups=["spawn_points"]]
+[node name="SlimeSpawnPoint7" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(731, 13)
 
-[node name="SlimeSpawnPoint8" type="Marker2D" parent="Node2D" groups=["spawn_points"]]
+[node name="SlimeSpawnPoint8" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(648, 76)
 
-[node name="Zon" parent="Node2D" instance=ExtResource("11_amwpr")]
+[node name="Zon" parent="Node2D/YSort" instance=ExtResource("11_amwpr")]
 position = Vector2(0, -7)
 
-[node name="trees" type="Node2D" parent="Node2D"]
-z_as_relative = false
-y_sort_enabled = true
+[node name="textbox" parent="Node2D/YSort" instance=ExtResource("17_dmf1v")]
 
-[node name="tree" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(-155, 92.99999)
-scale = Vector2(0.588, 0.6)
-
-[node name="tree2" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(24, -47)
-scale = Vector2(0.588, 0.6)
-
-[node name="tree3" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(64, 18.999998)
-scale = Vector2(0.588, 0.6)
-
-[node name="tree4" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(-49, -1.9073486e-06)
-scale = Vector2(0.588, 0.6)
-
-[node name="treetwo" parent="Node2D/trees" instance=ExtResource("13_khkpl")]
-position = Vector2(139, 2)
-
-[node name="treetwo2" parent="Node2D/trees" instance=ExtResource("13_khkpl")]
-position = Vector2(-79, 85)
-
-[node name="treetwo3" parent="Node2D/trees" instance=ExtResource("13_khkpl")]
-position = Vector2(94, -98)
-
-[node name="treetwo4" parent="Node2D/trees" instance=ExtResource("13_khkpl")]
-position = Vector2(-98, -72)
-
-[node name="treetwo5" parent="Node2D/trees" instance=ExtResource("13_khkpl")]
-position = Vector2(-278, -150)
-
-[node name="tree5" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(-31, -123.999985)
-scale = Vector2(0.588, 0.6)
-
-[node name="tree6" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(-12, 86)
-scale = Vector2(0.588, 0.6)
-
-[node name="tree7" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(196, -34)
-scale = Vector2(0.588, 0.6)
-
-[node name="tree8" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(-147, -3.0000005)
-scale = Vector2(0.588, 0.6)
-
-[node name="tree9" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(-226, -77.999985)
-scale = Vector2(0.588, 0.6)
-
-[node name="tree10" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(-259, 135)
-scale = Vector2(0.588, 0.6)
-
-[node name="treetwo6" parent="Node2D/trees" instance=ExtResource("13_khkpl")]
-position = Vector2(227, -82)
-
-[node name="treetwo7" parent="Node2D/trees" instance=ExtResource("13_khkpl")]
-position = Vector2(-255, 32)
-
-[node name="treetwo8" parent="Node2D/trees" instance=ExtResource("13_khkpl")]
-position = Vector2(166, 63)
-
-[node name="treetwo9" parent="Node2D/trees" instance=ExtResource("13_khkpl")]
-position = Vector2(-175, -106)
-
-[node name="treetwo10" parent="Node2D/trees" instance=ExtResource("13_khkpl")]
-position = Vector2(-200, 65)
-
-[node name="tree11" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(-19, -41)
-scale = Vector2(0.588, 0.6)
-
-[node name="tree12" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(56, -12.000003)
-scale = Vector2(0.588, 0.6)
-
-[node name="tree13" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(251, 0.9999962)
-scale = Vector2(0.588, 0.6)
-
-[node name="treetwo11" parent="Node2D/trees" instance=ExtResource("13_khkpl")]
-position = Vector2(51, 196)
-
-[node name="treetwo12" parent="Node2D/trees" instance=ExtResource("13_khkpl")]
-position = Vector2(404, -77)
-
-[node name="treetwo13" parent="Node2D/trees" instance=ExtResource("13_khkpl")]
-position = Vector2(6, -163)
-
-[node name="treetwo14" parent="Node2D/trees" instance=ExtResource("13_khkpl")]
-position = Vector2(-294, 252)
-
-[node name="treetwo15" parent="Node2D/trees" instance=ExtResource("13_khkpl")]
-position = Vector2(225, 264)
-
-[node name="treetwo16" parent="Node2D/trees" instance=ExtResource("13_khkpl")]
-position = Vector2(571, 204)
-
-[node name="treetwo17" parent="Node2D/trees" instance=ExtResource("13_khkpl")]
-position = Vector2(336, 29)
-
-[node name="treetwo18" parent="Node2D/trees" instance=ExtResource("13_khkpl")]
-position = Vector2(432, 225)
-
-[node name="tree14" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(248, 91.99997)
-scale = Vector2(0.588, 0.6)
-
-[node name="tree15" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(319, 124.99997)
-scale = Vector2(0.588, 0.6)
-
-[node name="tree16" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(146, 189.99995)
-scale = Vector2(0.588, 0.6)
-
-[node name="tree17" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(437, 47.999985)
-scale = Vector2(0.588, 0.6)
-
-[node name="tree18" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(-117, 216.99995)
-scale = Vector2(0.588, 0.6)
-
-[node name="tree19" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(-44, 176.99997)
-scale = Vector2(0.588, 0.6)
-
-[node name="tree20" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(11, 135.99997)
-scale = Vector2(0.588, 0.6)
-
-[node name="tree21" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(314, -73.00001)
-scale = Vector2(0.588, 0.6)
-
-[node name="tree22" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(379, 226.99995)
-scale = Vector2(0.588, 0.6)
-
-[node name="tree23" parent="Node2D/trees" instance=ExtResource("12_7mmci")]
-position = Vector2(304, 252.99995)
-scale = Vector2(0.588, 0.6)
-
-[node name="treetwo19" parent="Node2D/trees" instance=ExtResource("13_khkpl")]
-position = Vector2(-174, 201)
-
-[node name="treetwo20" parent="Node2D/trees" instance=ExtResource("13_khkpl")]
-position = Vector2(286, -143)
-
-[node name="tree 3" parent="Node2D/trees" instance=ExtResource("16_lr6e3")]
-y_sort_enabled = true
-position = Vector2(561, -117)
-
-[node name="tree 4" parent="Node2D/trees" instance=ExtResource("16_lr6e3")]
-y_sort_enabled = true
-position = Vector2(514, -62)
-
-[node name="tree 5" parent="Node2D/trees" instance=ExtResource("16_lr6e3")]
-y_sort_enabled = true
-position = Vector2(632, 12)
-
-[node name="tree 6" parent="Node2D/trees" instance=ExtResource("16_lr6e3")]
-y_sort_enabled = true
-position = Vector2(532, 16)
-
-[node name="tree 7" parent="Node2D/trees" instance=ExtResource("16_lr6e3")]
-y_sort_enabled = true
-position = Vector2(804, -32)
-
-[node name="tree 8" parent="Node2D/trees" instance=ExtResource("16_lr6e3")]
-y_sort_enabled = true
-position = Vector2(561, -117)
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 3
+custom_minimum_size = Vector2(100000000, 99999)
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
