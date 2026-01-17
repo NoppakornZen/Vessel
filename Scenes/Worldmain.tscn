@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://b486ajagh3ah8"]
+[gd_scene load_steps=36 format=3 uid="uid://b486ajagh3ah8"]
 
 [ext_resource type="Script" uid="uid://cf0kl7n2oskrc" path="res://Scripts/Worldmain.gd" id="1_csvos"]
 [ext_resource type="Texture2D" uid="uid://cjb87p3vv12n4" path="res://Prop/Grass_Middle.png" id="2_81c2d"]
@@ -1871,6 +1871,12 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r6p7k"]
 size = Vector2(346.17874, 203.19443)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dmf1v"]
+size = Vector2(9, 467)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hh67k"]
+size = Vector2(49, 7)
+
 [node name="Worldmain" type="Node2D"]
 script = ExtResource("1_csvos")
 
@@ -1956,8 +1962,47 @@ y_sort_enabled = true
 [node name="YSort" type="Node2D" parent="Node2D"]
 y_sort_enabled = true
 
-[node name="trees" type="Node2D" parent="Node2D/YSort"]
+[node name="SlimeSpawnPoint" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
 z_as_relative = false
+y_sort_enabled = true
+position = Vector2(618, 14)
+
+[node name="SlimeSpawnPoint2" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(648, -30)
+
+[node name="SlimeSpawnPoint3" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(715, 105)
+
+[node name="SlimeSpawnPoint4" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(601, 66)
+
+[node name="SlimeSpawnPoint5" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(792, 65)
+
+[node name="SlimeSpawnPoint6" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(779, -4)
+
+[node name="SlimeSpawnPoint7" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(731, 13)
+
+[node name="SlimeSpawnPoint8" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(648, 76)
+
+[node name="trees" type="Node2D" parent="Node2D/YSort"]
 y_sort_enabled = true
 
 [node name="tree" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
@@ -2113,80 +2158,101 @@ position = Vector2(-174, 201)
 position = Vector2(286, -143)
 
 [node name="tree 3" parent="Node2D/YSort/trees" instance=ExtResource("16_lr6e3")]
-y_sort_enabled = true
 position = Vector2(561, -117)
 
 [node name="tree 4" parent="Node2D/YSort/trees" instance=ExtResource("16_lr6e3")]
-y_sort_enabled = true
 position = Vector2(514, -62)
 
 [node name="tree 5" parent="Node2D/YSort/trees" instance=ExtResource("16_lr6e3")]
-y_sort_enabled = true
 position = Vector2(632, 12)
 
 [node name="tree 6" parent="Node2D/YSort/trees" instance=ExtResource("16_lr6e3")]
-y_sort_enabled = true
 position = Vector2(532, 16)
 
 [node name="tree 7" parent="Node2D/YSort/trees" instance=ExtResource("16_lr6e3")]
-y_sort_enabled = true
 position = Vector2(804, -32)
 
 [node name="tree 8" parent="Node2D/YSort/trees" instance=ExtResource("16_lr6e3")]
-y_sort_enabled = true
 position = Vector2(561, -117)
 
-[node name="SlimeSpawnPoint" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(618, 14)
+[node name="treetwo21" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(290, 71)
 
-[node name="SlimeSpawnPoint2" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(648, -30)
+[node name="treetwo22" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(222, 35)
 
-[node name="SlimeSpawnPoint3" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(715, 105)
+[node name="treetwo23" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(-122, -18)
 
-[node name="SlimeSpawnPoint4" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(601, 66)
+[node name="treetwo24" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(-35, 136)
 
-[node name="SlimeSpawnPoint5" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(792, 65)
+[node name="treetwo25" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(48, -107)
 
-[node name="SlimeSpawnPoint6" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(779, -4)
+[node name="treetwo26" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(339, 224)
 
-[node name="SlimeSpawnPoint7" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(731, 13)
+[node name="treetwo27" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(116, 281)
 
-[node name="SlimeSpawnPoint8" type="Marker2D" parent="Node2D/YSort" groups=["spawn_points"]]
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(648, 76)
+[node name="treetwo28" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(465, 8)
+
+[node name="treetwo29" parent="Node2D/YSort/trees" instance=ExtResource("13_khkpl")]
+position = Vector2(521, 238)
+
+[node name="tree24" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(399.99997, 37)
+scale = Vector2(0.588, 0.6)
+
+[node name="tree25" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(485.99997, 163)
+scale = Vector2(0.588, 0.6)
+
+[node name="tree26" parent="Node2D/YSort/trees" instance=ExtResource("12_7mmci")]
+position = Vector2(375, 75)
+scale = Vector2(0.588, 0.6)
+
+[node name="tree 9" parent="Node2D/YSort/trees" instance=ExtResource("16_lr6e3")]
+position = Vector2(832, 66)
+
+[node name="tree 11" parent="Node2D/YSort/trees" instance=ExtResource("16_lr6e3")]
+position = Vector2(576, -44)
+
+[node name="tree 12" parent="Node2D/YSort/trees" instance=ExtResource("16_lr6e3")]
+position = Vector2(613, -52)
 
 [node name="Zon" parent="Node2D/YSort" instance=ExtResource("11_amwpr")]
 position = Vector2(0, -7)
 
 [node name="textbox" parent="Node2D/YSort" instance=ExtResource("17_dmf1v")]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 z_index = 3
 custom_minimum_size = Vector2(100000000, 99999)
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="ZayryuTrigger" type="Area2D" parent="."]
+position = Vector2(594, 50)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZayryuTrigger"]
+position = Vector2(5.5, -50.5)
+shape = SubResource("RectangleShape2D_dmf1v")
+
+[node name="ZayryuTriger2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZayryuTriger2"]
+position = Vector2(742, -118)
+shape = SubResource("RectangleShape2D_hh67k")
+
+[connection signal="body_entered" from="Place Zayryu/StaticBody2D/Zayryu/PickupArea" to="." method="_on_pickup_area_body_entered"]
+[connection signal="body_entered" from="ZayryuTrigger" to="." method="_on_zayryu_trigger_body_entered"]
+[connection signal="body_entered" from="ZayryuTriger2" to="." method="_on_area_2d_body_entered"]
