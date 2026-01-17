@@ -3,6 +3,7 @@ extends Node2D
 var slime_scene = preload("res://Scenes/Slime.tscn") 
 var dialogue_index = 0
 var zayryu_event_triggered = false
+var sword_found_triggered = false
 
 @onready var player = $Node2D/YSort/Zon
 @onready var textbox = $Node2D/YSort/textbox
@@ -96,13 +97,13 @@ func _on_zayryu_trigger_body_entered(body: Node2D) -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.name == "Zon" and not zayryu_event_triggered:
-		zayryu_event_triggered = true #ล็อคไว้ไม่ให้เกิดซ้ำ
+	if body.name == "Zon" and not sword_found_triggered:
+		sword_found_triggered = true
 		
-	if player:
+		if player:
 			player.set_physics_process(false)
 			
-	if textbox:
+		if textbox:
 			textbox.show()
-			textbox.set_dialogue("Zon: Huh? What is this , It's a real sward? It looks very beautiful.")
-			dialogue_index = 13 # เริ่มต้นลำดับบทสนทนาช่วงที่ 3
+			textbox.set_dialogue("Zon: Huh? What is this, It's a real sword? It looks very beautiful.")
+			dialogue_index = 13
