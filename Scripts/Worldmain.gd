@@ -7,7 +7,7 @@ var sword_found_triggered = false
 var battle_started = false 
 
 @onready var player = $Node2D/YSort/Zon
-@onready var textbox = $Node2D/YSort/textbox
+@onready var textbox = $"Place Zayryu/StaticBody2D/Zayryu/Label"
 @onready var flash_screen = $ColorRect 
 
 func _ready():
@@ -16,6 +16,7 @@ func _ready():
 		flash_screen.modulate.a = 1.0
 	if player: player.set_physics_process(false)
 	if textbox: textbox.hide() 
+	print("เช็คโหนด Textbox: ", textbox) # ถ้าขึ้นว่า [null] แสดงว่า Path ผิดครับ [cite: 2026-01-02]
 	
 	await get_tree().create_timer(3.5).timeout
 	if flash_screen:
@@ -28,24 +29,24 @@ func _ready():
 func start_conversation():
 	if textbox:
 		textbox.show()
-		textbox.set_dialogue("Zon: Huh!!? Where am I? I just walked out of the store.") 
+		textbox.update_dialogue("Zon", "Huh!!? Where am I? I just walked out of the store.")
 		dialogue_index = 1
 	
 func _input(event):
 	if event.is_action_pressed("ui_accept") and textbox and textbox.visible:
 		if dialogue_index == 1:
 			dialogue_index = 2
-			textbox.set_dialogue("Zon: I need to get out of here as soon as possible.")
+			textbox.update_dialogue("Zon", "Huh!!? Where am I? I just walked out of the store.")
 		elif dialogue_index == 2:
 			dialogue_index = 3
 			textbox.hide()
 			if player: player.set_physics_process(true)
 		elif dialogue_index == 10:
 			dialogue_index = 11
-			textbox.set_dialogue("Zon: What's that blue light? It's up there....")
+			textbox.update_dialogue("Zon", "Huh!!? Where am I? I just walked out of the store.")
 		elif dialogue_index == 11:
 			dialogue_index = 12
-			textbox.set_dialogue("Zon: I feel like it's calling out to me")
+			textbox.update_dialogue("Zon", "Huh!!? Where am I? I just walked out of the store.")
 		elif dialogue_index == 12:
 			textbox.hide()
 			if player: player.set_physics_process(true)
@@ -55,7 +56,7 @@ func _input(event):
 			spawn_slime() # เริ่มการต่อสู้ [cite: 2026-01-02]
 		elif dialogue_index == 20:
 			dialogue_index = 21
-			textbox.set_dialogue("Zon: What's it like here? It's so different  from the world I used to live in.")
+			textbox.update_dialogue("Zon", "Huh!!? Where am I? I just walked out of the store.")
 		elif dialogue_index == 21:
 			textbox.hide()
 
@@ -82,7 +83,7 @@ func _on_zayryu_trigger_body_entered(body: Node2D) -> void:
 		if player: player.set_physics_process(false)
 		if textbox:
 			textbox.show()
-			textbox.set_dialogue("Zon: Huh? Why are things around me making me anxious?")
+			textbox.update_dialogue("Zon", "Huh!!? Where am I? I just walked out of the store.")
 			dialogue_index = 10
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -91,7 +92,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		if player: player.set_physics_process(false)
 		if textbox:
 			textbox.show()
-			textbox.set_dialogue("Zon: Huh? What is this, It's a real sword? It looks very beautiful.")
+			textbox.update_dialogue("Zon", "Huh!!? Where am I? I just walked out of the store.")
 			dialogue_index = 13
 			
 func check_enemies_cleared():
@@ -118,5 +119,5 @@ func check_enemies_cleared():
 		# แสดง TextBox และตั้งค่าบทสนทนาไปที่ลำดับที่ 20 (ตามที่คุณตั้งไว้) [cite: 2026-01-02]
 		if textbox:
 			textbox.show()
-			textbox.set_dialogue("Zon: What the heck is that?")
+			textbox.update_dialogue("Zon", "Huh!!? Where am I? I just walked out of the store.")
 			dialogue_index = 20
