@@ -1,7 +1,5 @@
 extends CanvasLayer
 
-# 1. อ้างอิงที่อยู่โหนดตามโครงสร้างจริงในรูป image_317037.png
-# สังเกตว่าต้องมี Panel -> MarginContainer -> Panel ตามลำดับที่คุณทำไว้ครับ
 @onready var display_label = $MarginContainer/Panel/MarginContainer/Panel/HBoxContainer/Label
 @onready var portrait_node = $MarginContainer/Panel/MarginContainer/Panel/HBoxContainer/TextureRect
 
@@ -11,12 +9,12 @@ func _ready():
 	hide()
 	
 
-# ฟังก์ชันรับค่า ชื่อ, ข้อความ, และรูปภาพ [cite: 2026-01-02]
+# ฟังก์ชันรับค่า ข้อความ และรูปภาพ
 func update_dialogue(speaker_name: String, text_content: String, portrait_texture: Texture2D = null):
 	show()
 	is_active = true
 	
-	# ป้องกัน Error ถ้าหาโหนดไม่เจอ จะได้รู้ว่าจุดไหนผิด
+	# ป้องกัน Error เฉยๆ ไม่มีไร
 	if display_label:
 		display_label.text = speaker_name + ": " + text_content
 		display_label.visible_ratio = 0
