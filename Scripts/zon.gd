@@ -10,8 +10,8 @@ var last_dir = "Down"
 var last_flip = false 
 var has_zayryu = false 
 var can_attack = true
-var is_dead = false # เพิ่มตัวแปรเช็คสถานะตาย
-var is_attacking = false # เพิ่มตัวแปรเพื่อเช็คว่ากำลังฟันอยู่หรือไม่
+var is_dead = false # ตัวแปรสถานะตาย
+var is_attacking = false # ตัวแปรเพื่อเช็คว่ากำลังฟันอยู่ไหม
 var knockback_velocity = Vector2.ZERO
 
 var max_hp = 100
@@ -29,7 +29,7 @@ func _physics_process(delta):
 
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
-	# 1. จัดการเรื่องความเร็ว (Velocity) ตลอดเวลา เพื่อให้เดินได้แม้จะฟันอยู่
+	# ความเร็วให้เวลาเดินอยู่เเล้วยังตีได้อยู่
 	if direction != Vector2.ZERO:
 		velocity = direction * SPEED
 	else:
@@ -37,7 +37,7 @@ func _physics_process(delta):
 
 	# 2. จัดการเรื่อง Animation
 	if is_attacking:
-		# ถ้ากำลังฟัน ให้ปล่อยให้แอนิเมชันฟันเล่นจนจบ (ไม่ต้องสั่ง play ซ้ำ)
+		# ถ้ากำลังฟัน ให้ปล่อยให้แอนิเมชันฟันเล่นจนจบ
 		pass 
 	elif direction != Vector2.ZERO:
 		# ถ้าเดินและไม่ได้ฟัน ให้เล่นท่าเดิน
@@ -61,18 +61,18 @@ func perform_attack():
 	can_attack = false
 	$AttackTimer.start()
 	
-	# ปิดการตรวจจับไว้ก่อน (ป้องกันดาบไปโดนก่อนแอนิเมชันเริ่ม)
+	# ปิดการตรวจจับไว้
 	sword_area.monitoring = false 
 	
 	var attack_anim = "Sword_Attack_" + last_dir 
 	sprite.play(attack_anim)
 	sprite.flip_h = last_flip
 	
-	# รอจังหวะให้ดาบเหวี่ยง (ประมาณ 0.1 วินาที หรือตามเฟรมแอนิเมชัน)
+	# รอจังหวะให้ดาบเหวี่ยง
 	await get_tree().create_timer(0.1).timeout
 	sword_area.monitoring = true # เปิดให้ดาบฟันโดนได้จริง
 	
-	# สั่งสั่นกล้องให้ดูมีน้ำหนัก (สะใจขึ้น)
+	# สั่งสั่นกล้องให้ดูมีน้ำหนัก สะใจจัดดด
 	$Camera2D.apply_shake(5.0) #สำคัญ!!!! ทำให้กล้องสั่นนน ปรับความเเรงเบา
 
 func _on_attack_timer_timeout():
@@ -127,7 +127,7 @@ func _play_idle_animation():
 func _on_animated_sprite_2d_animation_finished():
 	if sprite.animation.begins_with("Sword_Attack"):
 		is_attacking = false
-		sword_area.monitoring = false # ดาบหายไป ไม่ให้เดินชนแล้วเลือดลด
+		sword_area.monitoring = false # ดาบหาย เดินชนเเล้วเลือดไม่ลด
 
 func change_to_sword_mode():
 	
@@ -137,6 +137,6 @@ func change_to_sword_mode():
 	await get_tree().create_timer(1.0).timeout
 	
 	has_zayryu = true
-	health_bar.visible = true # โชว์หลอดเลือดเมื่อได้ดาบ Zayryu
+	health_bar.visible = true # โชว์หลอดเลือดเวลา เราเก็บดาบ
 	print("Zon has obtained Zayryu!")
 	
