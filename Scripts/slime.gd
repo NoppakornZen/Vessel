@@ -25,7 +25,7 @@ func _ready():
 func _physics_process(delta):
 	if is_dead: return
 	
-	# 1. จัดการแรงผลัก (Knockback)
+	# 1. จัดการแรงผลัก
 	if knockback_velocity.length() > 10:
 		velocity = knockback_velocity
 		knockback_velocity = knockback_velocity.lerp(Vector2.ZERO, 0.1)
@@ -35,7 +35,7 @@ func _physics_process(delta):
 		var direction = (player.global_position - global_position).normalized()
 		velocity = direction * SPEED
 		
-		# เช็คว่าถ้าอยู่ประชิดตัว (can_attack) ให้เริ่มนับเวลาถอยหลังเพื่อกัด
+		# เช็คว่าถ้าอยู่ประชิดตัวให้เริ่มนับเวลาถอยหลังเพื่อกัด
 		if can_attack:
 			attack_timer += delta
 			if attack_timer >= ATTACK_COOLDOWN:
@@ -46,7 +46,7 @@ func _physics_process(delta):
 	
 	move_and_slide()
 
-# --- ฟังก์ชันใหม่: สั่งกัด Zon (เพิ่มส่วนนี้เข้าไป Error บรรทัด 46 จะหายครับ) ---
+ # สั่งให้กัด
 func _perform_attack():
 	if player and player.has_method("take_damage"):
 		var knockback_dir = (player.global_position - global_position).normalized()
@@ -54,7 +54,7 @@ func _perform_attack():
 		player.take_damage(ATTACK_DAMAGE, knockback_dir * 300.0) 
 		print("Slime: กัด Zon เข้าให้แล้ว! (-", ATTACK_DAMAGE, ")")
 
-# --- ฟังก์ชันรับดาเมจ (ปรับปรุงให้รองรับค่า Crit) ---
+# ดาเมจ ตีกระเดน คริ อะไรงี้
 func take_damage(amount: int, knockback_force: Vector2, is_crit: bool = false):
 	if is_dead: return
 	
@@ -90,16 +90,16 @@ func die():
 	is_dead = true
 	queue_free()
 
-# --- ระบบ Signal (ตรวจสอบให้ชื่อฟังก์ชันตรงกับที่เชื่อมไว้ใน Editor) ---
+# ระบบ Signal
 func _on_area_2d_body_entered(body):
 	if body.name == "Zon":
 		player = body
 		chase = true
 
-func _on_attack_area_body_entered(body): # Area สำหรับระยะกัด
+func _on_attack_area_body_entered(body): # Area ระยะตีๆ++
 	if body.name == "Zon":
 		can_attack = true
-		attack_timer = ATTACK_COOLDOWN # ให้กัดทีแรกทันทีที่ถึงตัว
+		attack_timer = ATTACK_COOLDOWN # ให้กัดทีแรกทันที
 
 func _on_attack_area_body_exited(body):
 	if body.name == "Zon":
