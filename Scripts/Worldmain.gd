@@ -9,8 +9,7 @@ var dialogue_list = []
 var current_line = 0   
 var current_portrait: Texture2D = null
 
-# 1. ตรวจสอบ Path ตรงนี้ให้ดีที่สุด!
-# ถ้าลาก Textbox มาไว้ใน Worldmain แล้ว Path ต้องตรงกับใน Scene Tree
+# ถ้าลาก Textbox มาไว้ใน Worldmain
 @onready var player = $Node2D/YSort/Zon
 @onready var textbox = $Node2D/YSort/textbox
 @onready var flash_screen = $ColorRect 
