@@ -34,7 +34,7 @@ func pickup():
 	if zon:
 		zon.change_to_sword_mode()
 	
-	# 2. สั่งให้ฉากหลัก (Test/Worldmain) เสก Slime ออกมา [สำคัญ!]
+	# 2. สั่งฉากหลักเสก Slime ออกมา
 	if get_tree().current_scene.has_method("spawn_slime"):
 		get_tree().current_scene.spawn_slime()
 	else:
