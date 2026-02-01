@@ -1,6 +1,6 @@
-extends "res://Scripts/npc_base.gd.gd" # ตรวจสอบชื่อไฟล์แม่ให้ตรงกับในเครื่องคุณ
+extends "res://Scripts/npc_base.gd.gd"
 
-# --- Dialogue Settings (จะปรากฏใน Inspector) ---
+#จะมีใน Inspector
 @export var npc_name: String = "พนักงานกิลด์"
 @export var npc_portrait: Texture2D # ช่องสำหรับลากรูปหน้า NPC มาใส่
 @export var dialogue_lines: Array[String] = ["สวัสดี Zon ยินดีต้อนรับสู่กิลด์!"]
@@ -13,7 +13,7 @@ func _input(event):
 		_start_conversation()
 
 func _start_conversation():
-	# ค้นหาโหนด Textbox ที่อยู่ในฉาก
+	# หาโหนด Textbox
 	var textbox = get_tree().root.find_child("textbox", true, false)
 	
 	if textbox:
@@ -29,7 +29,7 @@ func _start_conversation():
 
 # --- Signal Connections (เชื่อมจาก Area2D) ---
 func _on_area_2d_body_entered(body):
-	if body.name == "Zon": # มั่นใจว่าตัวที่เดินเข้ามาคือ Zon
+	if body.name == "Zon": 
 		is_player_nearby = true
 
 func _on_area_2d_body_exited(body):
